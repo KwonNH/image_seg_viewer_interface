@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<head>
+  <title>Image Segmentation Viewer Interface</title>
+  <meta charset="utf-8">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+  <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+    <script src="js/responsivevoice.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="js/d3.button.js"></script>
+  <style>
+  html, body {
+    height: 100%;
+    padding-bottom:150px;
+  }
+.main{
+      padding: 10px;
+      height: 1000px;
+      overflow: scroll
+  }
+.image{
+      padding: 10px;
+      width:100%;
+      height:1000px;
+      overflow: scroll
+    }
+#metadata{
+      padding: 10px;
+      padding-left: 22%;
+      width:40%;
+      float:left;
+      height:150px;
+      overflow: scroll
+    }
+.buttons{
+      padding: 10px;
+      padding-left: 5%;
+      width:20%;
+      float:left;
+      height:150px;
+      overflow: scroll
+    }
+  </style>
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<center>
+    <script src="js/image_data_kor.js" ></script>
+    <script src="js/load_metadata.js" ></script>
+    <script src="js/jquery.js" ></script>
+
+    <h2>
+        Image Selection
+    </h2>
+
+    <div class="body"  onclick="voice()">
+
+        <div class="tab" id="image_2">
+
+            <a id='dbl1' onclick="voice()" href="image_1.html"><img src="./thumbnail_image/Starry_thumb.jpg"
+                                        onclick="read_full_desc(1);" onmouseover="read_full_desc(1);" onmouseout="voice_cancel();" ondblclick="voice_cancel()"/></a>
+
+            <a id='dbl2' onclick="voice()" href="image_2.html"><img src="./thumbnail_image/Girl_thumb.jpg"
+                                      onclick="read_full_desc(2);" onmouseover="read_full_desc(2);" onmouseout="voice_cancel();" ondblclick="voice_cancel()"/></a>
+
+            <a id='dbl3' onclick="voice()" href="image_3.html"><img src="./thumbnail_image/Apple_thumb.jpg"
+                                      onclick="read_full_desc(3);" onmouseover="read_full_desc(3);" onmouseout="voice_cancel();" ondblclick="voice_cancel()"/></a>
+
+        </div>
+    </div>
+
+</center>
+</body>
+</html>

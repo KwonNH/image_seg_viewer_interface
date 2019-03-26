@@ -7,7 +7,7 @@ from numpy import *
 
 
 def main():
-    image_data = json.load(open("./image_data_final.json", 'r'))
+    image_data = json.load(open("./image_data/image_data_kor.json", 'r', encoding='utf-16'))
 
     images = image_data['images']
     for img in images:
@@ -40,13 +40,14 @@ def main():
 
             obj['bbox'] = bbox
 
+        sorted_by_point = sorted(ann, key=lambda k: [k['bbox'][0][1], k['bbox'][0][0]])
 
-        #calculate duplicates
+        # calculate duplicates
         objects = []
 
         object_counted = []
 
-        for i in ann:
+        for i in sorted_by_point:
             objects.append(i['category'])
             object_count = objects.count(i['category'])
 
@@ -54,15 +55,26 @@ def main():
 
         count = 0
 
-        for i in ann:
+        for i in sorted_by_point:
             i['duplicates_num'] = object_counted[count]
             count = count + 1
 
-        sorted_ann = sorted(ann, key=lambda k: k['area'], reverse=True)
+        # getting category list
+        cat_list = []
+
+        for i in sorted_by_point:
+            if i['duplicates_num'] != 1:
+                cat_list.append(i['category']+str(i['duplicates_num']))
+            else:
+                cat_list.append(i['category'])
+
+        sorted_ann = sorted(sorted_by_point, key=lambda k: k['area'], reverse=True)
+
+        img['sorted_by_point'] = cat_list
 
         img['annotations'] = sorted_ann
 
-    with open('result_final.json', 'w') as fp:
+    with open('result_kor.json', 'w') as fp:
         json.dump(image_data, fp, sort_keys=False, indent=1, separators=(',', ': '), ensure_ascii=False)
 
 

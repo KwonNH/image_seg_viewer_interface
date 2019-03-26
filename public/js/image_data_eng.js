@@ -4,7 +4,7 @@ var image_data =
   {
    "file_name": "Apple.jpg",
    "title": "The Basket of Apples",
-   "id": 4,
+   "id": 3,
    "height": "530",
    "width": "659",
    "artist": "Paul Cézanne",
@@ -980,7 +980,7 @@ var image_data =
        366.0
       ]
      ],
-     "duplicates_num": 4
+     "duplicates_num": 7
     },
     {
      "segmentation": [
@@ -1036,7 +1036,7 @@ var image_data =
        327.0
       ]
      ],
-     "duplicates_num": 8
+     "duplicates_num": 4
     },
     {
      "segmentation": [
@@ -1092,7 +1092,7 @@ var image_data =
        377.0
       ]
      ],
-     "duplicates_num": 5
+     "duplicates_num": 8
     },
     {
      "segmentation": [
@@ -1252,14 +1252,31 @@ var image_data =
        297.0
       ]
      ],
-     "duplicates_num": 7
+     "duplicates_num": 5
     }
+   ],
+   "sorted_by_point": [
+    "bottle",
+    "basket",
+    "apple",
+    "bread",
+    "plate",
+    "table",
+    "book",
+    "cloth",
+    "apple2",
+    "apple3",
+    "apple4",
+    "apple5",
+    "apple6",
+    "apple7",
+    "apple8"
    ]
   },
   {
    "file_name": "Girl.jpg",
    "title": "Girl with a Pearl Earring",
-   "id": 3,
+   "id": 2,
    "height": "527",
    "width": "450",
    "artist": "Johannes Vermeer",
@@ -2245,12 +2262,24 @@ var image_data =
      ],
      "duplicates_num": 1
     }
+   ],
+   "sorted_by_point": [
+    "turban",
+    "face",
+    "nose",
+    "eye",
+    "eye2",
+    "ear",
+    "mouth",
+    "earring",
+    "neck",
+    "clothes"
    ]
   },
   {
    "file_name": "Mondrian.jpg",
    "title": "Composition with Red Blue and Yellow",
-   "id": 2,
+   "id": 0,
    "height": "479",
    "width": "473",
    "artist": "Piet Mondrian",
@@ -2302,7 +2331,7 @@ var image_data =
        346.0
       ]
      ],
-     "duplicates_num": 5
+     "duplicates_num": 2
     },
     {
      "segmentation": [
@@ -2346,7 +2375,7 @@ var image_data =
        478.0
       ]
      ],
-     "duplicates_num": 3
+     "duplicates_num": 5
     },
     {
      "segmentation": [
@@ -2514,7 +2543,7 @@ var image_data =
        345.0
       ]
      ],
-     "duplicates_num": 2
+     "duplicates_num": 3
     },
     {
      "segmentation": [
@@ -2598,7 +2627,7 @@ var image_data =
        475.0
       ]
      ],
-     "duplicates_num": 6
+     "duplicates_num": 4
     },
     {
      "segmentation": [
@@ -2642,7 +2671,7 @@ var image_data =
        408.0
       ]
      ],
-     "duplicates_num": 4
+     "duplicates_num": 6
     },
     {
      "segmentation": [
@@ -2688,10 +2717,20 @@ var image_data =
      ],
      "duplicates_num": 7
     }
+   ],
+   "sorted_by_point": [
+    "line",
+    "surface",
+    "surface2",
+    "surface3",
+    "surface4",
+    "surface5",
+    "surface6",
+    "surface7"
    ]
   },
   {
-   "file_name": "The_starry_night.jpg",
+   "file_name": "The_Starry_Night.jpg",
    "title": "The Starry Night",
    "id": 1,
    "height": "300",
@@ -3437,7 +3476,7 @@ var image_data =
        282.0
       ]
      ],
-     "duplicates_num": 1
+     "duplicates_num": 11
     },
     {
      "segmentation": [
@@ -3505,7 +3544,7 @@ var image_data =
        48.0
       ]
      ],
-     "duplicates_num": 5
+     "duplicates_num": 1
     },
     {
      "segmentation": [
@@ -3561,7 +3600,7 @@ var image_data =
        135.0
       ]
      ],
-     "duplicates_num": 10
+     "duplicates_num": 7
     },
     {
      "segmentation": [
@@ -3617,7 +3656,7 @@ var image_data =
        61.0
       ]
      ],
-     "duplicates_num": 9
+     "duplicates_num": 5
     },
     {
      "segmentation": [
@@ -3677,7 +3716,7 @@ var image_data =
        101.0
       ]
      ],
-     "duplicates_num": 3
+     "duplicates_num": 6
     },
     {
      "segmentation": [
@@ -3729,7 +3768,7 @@ var image_data =
        35.0
       ]
      ],
-     "duplicates_num": 7
+     "duplicates_num": 3
     },
     {
      "segmentation": [
@@ -3785,7 +3824,7 @@ var image_data =
        245.0
       ]
      ],
-     "duplicates_num": 4
+     "duplicates_num": 10
     },
     {
      "segmentation": [
@@ -3845,7 +3884,7 @@ var image_data =
        28.0
       ]
      ],
-     "duplicates_num": 6
+     "duplicates_num": 2
     },
     {
      "segmentation": [
@@ -3897,7 +3936,7 @@ var image_data =
        43.0
       ]
      ],
-     "duplicates_num": 8
+     "duplicates_num": 4
     },
     {
      "segmentation": [
@@ -3949,7 +3988,7 @@ var image_data =
        166.0
       ]
      ],
-     "duplicates_num": 2
+     "duplicates_num": 8
     },
     {
      "segmentation": [
@@ -4001,8 +4040,25 @@ var image_data =
        226.0
       ]
      ],
-     "duplicates_num": 11
+     "duplicates_num": 9
     }
+   ],
+   "sorted_by_point": [
+    "star",
+    "star2",
+    "star3",
+    "moon",
+    "star4",
+    "star5",
+    "tree",
+    "wind",
+    "star6",
+    "star7",
+    "star8",
+    "star9",
+    "star10",
+    "star11",
+    "town"
    ]
   }
  ]
