@@ -158,7 +158,7 @@ function draw_polygon(seg_mode){
                 var cat = d.category+String(d.duplicates_num);
             }
 
-            tooltip.text(cat);
+            //tooltip.text(cat);
             if(voice_flag == "on"){
                 responsiveVoice.cancel();
                 responsiveVoice.speak(cat, language);
@@ -289,7 +289,7 @@ var rect = d3.select('body').append("rect")
                 var background = "background";
             }
 
-            tooltip.text(background);
+            //tooltip.text(background);
 
             if(voice_flag == "on"){
                 responsiveVoice.cancel();
