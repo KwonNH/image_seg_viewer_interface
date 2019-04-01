@@ -104,7 +104,8 @@ function get_objects_list(annotations){
     var counts = {};
 
     for(var i=annotations.length-1;i>=0;i--){
-        objects_list.push(annotations[i].category);
+        if(annotations[i].category != "배경")
+            objects_list.push(annotations[i].category);
     }
     objects_list = Array.from(objects_list);
     objects_list.forEach(function(x) { counts[x] = (counts[x] || 0)+1; });
@@ -123,9 +124,10 @@ function draw_polygon(seg_mode){
         svg.selectAll("polygon")
         .data(img_file.annotations)
         .enter().append("polygon")
-        .attr("points",function(d) {
+        .attr("points", function(d) {
             return d.segmentation.map(function(d) {
-                    return [x(d[0]),y(d[1])].join(","); }).join(" "); });
+                    return [x(d[0]),y(d[1])].join(","); }).join(" "); })
+        ;
     }
 
     else if(seg_mode == "rough"){ //rough(bbox mode)
@@ -178,7 +180,12 @@ function draw_polygon(seg_mode){
                     voice_desc = "this is "+d.object_description +", color is "+ d.object_color +", and this is located on  the  "+ d.object_position +" side of the picture";
                 }
                 */
-                voice_desc = d.object_description +" . 색깔은 "+ d.object_color +"이며, 그림의  "+ d.object_position +"에 위치해 있습니다.";
+                if(d.category == "배경"){
+                    voice_desc = "그림의 배경입니다";
+                }
+                else{
+                    voice_desc = d.object_description +" . 색깔은 "+ d.object_color +"이며, 그림의  "+ d.object_position +"에 위치해 있습니다.";
+                }
 
                 responsiveVoice.speak(voice_desc, language);
             }

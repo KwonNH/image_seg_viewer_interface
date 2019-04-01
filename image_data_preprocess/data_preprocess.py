@@ -13,6 +13,13 @@ def main():
     for img in images:
         ann = img['annotations']
 
+        background = \
+            {"segmentation": [[0, 0], [img['width'], 0], [img['width'], img['height']], [0, img['height']]],
+             "category": "배경"
+             }
+
+        ann.append(background)
+
         for obj in ann:
             obj_list = obj['segmentation']
 
