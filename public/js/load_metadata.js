@@ -56,6 +56,20 @@ function read_full_desc(img_id){
 
 }
 
+function full_desc(img_id){
+    var img_file = find_by_file_id(image_data, img_id);
+
+    var title = img_file.title;
+
+    var artist = img_file.artist;
+
+    var year = img_file.year;
+
+    var desc = img_file.description;
+
+    return title + ", " + artist + ", " + year + "년 작, " + desc;
+}
+
 function voice(){
 	responsiveVoice.speak("voice enabled", language);
 	//responsiveVoice.speak("음성 활성화", "Korean Male");

@@ -2,16 +2,16 @@
 <head>
   <title>Image Segmentation Viewer Interface</title>
   <meta charset="utf-8">
-  <script src="https://d3js.org/d3.v4.min.js"></script>
-  <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
-  <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+  <script src="js/d3.v4.min.js"></script>
+  <script src="js/d3.tip.v0.6.3.js"></script>
     <script src="js/responsivevoice.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="js/d3.button.js"></script>
   <style>
   html, body {
     height: 100%;
-    padding-bottom:150px;
+    width:device-width;
+    padding-bottom:150px
   }
 .main{
       padding: 10px;
@@ -51,22 +51,24 @@
     <script src="js/jquery.js" ></script>
 
     <h2>
-        Image Selection
+        감상하고자 하는 명화를 선택하세요.
     </h2>
 
-    <div class="body"  onclick="voice()">
+    <div class="body">
 
-        <div class="tab" id="image_2">
+        <div class="tab" id="image">
 
-            <a id='dbl1' onclick="voice()" href="image_1.html"><img src="./thumbnail_image/Starry_thumb.jpg"
-                                        onclick="read_full_desc(1);" onmouseover="read_full_desc(1);" onmouseout="voice_cancel();" ondblclick="voice_cancel()"/></a>
+            <a id="1" href="image_1.html" ><img src="./thumbnail_image/Starry_thumb.jpg"/></a>
+            <a id="2" href="image_2.html" ><img src="./thumbnail_image/Girl_thumb.jpg"/></a>
+            <a id="3" href="image_3.html" ><img src="./thumbnail_image/Apple_thumb.jpg"/></a>
 
-            <a id='dbl2' onclick="voice()" href="image_2.html"><img src="./thumbnail_image/Girl_thumb.jpg"
-                                      onclick="read_full_desc(2);" onmouseover="read_full_desc(2);" onmouseout="voice_cancel();" ondblclick="voice_cancel()"/></a>
+            <script>
+                document.getElementById("1").title = full_desc(1);
+                document.getElementById("2").title = full_desc(2);
+                document.getElementById("3").title = full_desc(3);
+            </script>
 
-            <a id='dbl3' onclick="voice()" href="image_3.html"><img src="./thumbnail_image/Apple_thumb.jpg"
-                                      onclick="read_full_desc(3);" onmouseover="read_full_desc(3);" onmouseout="voice_cancel();" ondblclick="voice_cancel()"/></a>
-
+            </a>
         </div>
     </div>
 

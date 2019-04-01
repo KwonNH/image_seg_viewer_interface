@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<style>
+body {
+  font: 10px sans-serif;
+}
+#main {
+  position: relative;
+  width: 634px;
+  margin: auto;
+}
+canvas {
+  padding: 0;
+  margin: 0;
+}
+svg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+.brush .extent {
+  fill-opacity: .3;
+  shape-rendering: crispEdges;
+}
+.resize rect {
+  visibility: visible !important;
+  fill: #333;
+  fill-opacity: .8;
+  stroke: #555;
+  stroke-width: 1.5px;
+}
+.histo {
+  fill-opacity: .4;
+  stroke-width: 2;
+}
+</style>
+<title></title>
+</head>
+<body>
+<div id="main"></div>
+<script>
+'use strict';
+
+function load() {
+  var image  = this,
+      width  = image.width,
+      height = image.height,
+      data   = [],
+
+      brushsize = 6,
+      x = d3.scale.linear().range([0, width - brushsize]),
+      y = d3.scale.linear().range([brushsize, height - brushsize]),
+
+      rgb = d3.scale.ordinal().domain(d3.range(3)).range(["red", "green", "blue"]),
+      xH = d3.scale.linear().domain([0, 255]).range([0, width]),
+      yH = d3.scale.linear().range([0, height / 4]);
+
+  var svg, canvas, histo;
+
+  var empty = Array(256);
+  for (var i = 0; i < 256; i++) { empty[i] = 0; }
+
+  function histogram(extent, context) {
+    var x = width  *  extent[0][0],
+        y = height *  extent[0][1],
+        w = width  * (extent[1][0] - extent[0][0]),
+        h = height * (extent[1][1] - extent[0][1]),
+        p = context.getImageData(x, y, w, h).data,
+        d = d3.range(3).map(function() {
+          return empty.slice();
+        });
+
+    i = 0;
+    do {
+      d[0][p[i++]]++;
+      d[1][p[i++]]++;
+      d[2][p[i++]]++;
+      i++; // alpha
+    } while(i < p.length)
+
+    var max = Math.max(d3.max(d[0]), d3.max(d[1]), d3.max(d[2]));
+    yH.domain([0, max]);
+
+    return d;
+  }
+
+  function brushmove() {
+    canvas.each(function() {
+      data = histogram(brush.extent(), this.context);
+      redraw();
+    });
+  }
+
+  function draw() {
+    histo = svg.selectAll(".histo")
+      .data(data).enter()
+      .append("path")
+      .attr("class", "histo")
+      .attr("fill", function(d, i) { return rgb(i); })
+      .attr("stroke", function(d, i) { return rgb(i); });
+    redraw();
+  }
+
+  function redraw() {
+    histo.data(data).attr("d", area);
+  }
+
+  var area = d3.svg.area()
+    .x(function(d, i) { return xH(i); })
+    .y0(height)
+    .y1(function(d) { return height - yH(d); })
+    .interpolate("basis");
+
+  var brush = d3.svg.brush()
+    .x(x)
+    .y(y)
+    .extent([[.4, .4],[.6, .6]])
+    .on("brush", brushmove);
+
+  svg = d3.select("#main")
+    .append("svg")
+      .attr("width", width)
+      .attr("height", height)
+    .append("g")
+
+  canvas = d3.select("#main")
+    .append("canvas")
+    .attr("width", width)
+    .attr("height", height)
+    .each(function() {
+      this.context = this.getContext('2d');
+      this.context.drawImage(image, 0, 0);
+      data = histogram(brush.extent(), this.context);
+      draw();
+    });
+
+  svg.append("g")
+      .attr("class", "brush")
+      .call(brush);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var image = new Image();
+  image.src = 'Starry.jpg';
+  image.addEventListener("load", load);
+});
+</script>
+</body>
+</html>

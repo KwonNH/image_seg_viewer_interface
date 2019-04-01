@@ -167,7 +167,7 @@ function draw_polygon(seg_mode){
             return tooltip.style("visibility", "visible");})
     .on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
     .on("mouseout", function(){ responsiveVoice.cancel(); return tooltip.style("visibility", "hidden");})
-    .on("dblclick", function(d) {
+    .on("click", function(d) {
             if(voice_flag == "on"){
                 responsiveVoice.cancel();
                 /*
@@ -182,7 +182,11 @@ function draw_polygon(seg_mode){
 
                 responsiveVoice.speak(voice_desc, language);
             }
-             });
+             })
+    .append("svg:title")
+    .text(function(d) { return d.category + String(d.duplicates_num)})
+    .append("svg:id")
+    .text(function(d) { return d.category + String(d.duplicates_num)});
 }
 
 function change_voice_option(voice_flag){

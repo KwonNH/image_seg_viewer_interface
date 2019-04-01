@@ -30,7 +30,7 @@ jQuery(function($) {
         return false;
     });
 });
-
+/*
 leftIsDragging   = false;
 middleIsDragging = false;
 rightIsDragging  = false;
@@ -89,3 +89,4 @@ $(document).bind('mousemove', function(event) {
         console.log('right dragging');
     }
 });
+*/

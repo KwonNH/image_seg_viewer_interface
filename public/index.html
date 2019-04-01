@@ -3,9 +3,8 @@
 <head>
   <title>Image Segmentation Viewer Interface</title>
   <meta charset="utf-8">
-  <script src="https://d3js.org/d3.v4.min.js"></script>
-  <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
-  <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+  <script src="js/d3.v4.min.js"></script>
+  <script src="js/d3.tip.v0.6.3.js"></script>
     <script src="js/responsivevoice.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="js/d3.button.js"></script>
@@ -13,6 +12,9 @@
   html, body {
     height: 100%;
     padding-bottom:150px;
+    width:device-width;
+    initial-scale:1;
+    draggable:false
   }
 .main{
       padding: 10px;
@@ -52,16 +54,20 @@
     <script src="js/jquery.js" ></script>
 
     <h2>
-        Tutorial
+        튜토리얼
     </h2>
 
     <div class="body">
 
-        <div class="tab" id="image_1">
+        <div class="tab" id="image">
 
-           <a id='dbl2' onclick="voice()" href="image_0.html"><img src="./thumbnail_image/Mondrian_thumb.jpg"
-                                        onclick="read_full_desc(0);" onmouseover="read_full_desc(0);" onmouseout="voice_cancel();" ondblclick="voice_cancel()"/></a>
+            <a id="0" href="image_0.html" ><img src="./thumbnail_image/Mondrian_thumb.jpg"/></a>
+
         </div>
+
+        <script>
+            document.getElementById("0").title = full_desc(0);
+        </script>
 
         <h3>
 
