@@ -9,6 +9,17 @@ var log_array = [];
 
 var log_count = 0;
 
+var desc_mode = 0;
+
+function change_desc_mode(){
+    if(desc_mode == 0){ //default
+        return 1;
+    }
+    else if(desc_mode == 1){
+        return 0;
+    }
+}
+
 function convertArrayOfObjectsToCSV(args) {
         var result, ctr, keys, columnDelimiter, lineDelimiter, data;
 
@@ -171,7 +182,11 @@ function draw_polygon(seg_mode){
     .on("mouseout", function(){ responsiveVoice.cancel(); return tooltip.style("visibility", "hidden");})
     .on("click", function(d) {
             if(voice_flag == "on"){
-                responsiveVoice.cancel();
+
+                var synth = window.speechSynthesis;
+
+                if(synth.speaking)
+                    synth.cancel();
                 /*
                 if(d.object_position.includes("side")){
                     voice_desc = "this is "+d.object_description +", color is "+ d.object_color +", and this is located on  the  "+ d.object_position +" of the picture";
@@ -191,9 +206,27 @@ function draw_polygon(seg_mode){
             }
              })
     .append("svg:title")
-    .text(function(d) { return d.category + String(d.duplicates_num)})
-    .append("svg:id")
-    .text(function(d) { return d.category + String(d.duplicates_num)});
+    .text(function(d) {
+        if(desc_mode == 0){
+            if(d.category == "배경")
+            return d.category;
+        else{
+            if(d.duplicates_num != 1)
+                return d.category + String(d.duplicates_num);
+            else
+                return d.category;
+            }
+        }
+        else if(desc_mode == 1){
+            if(d.category == "배경"){
+                    voice_desc = "그림의 배경입니다";
+            }
+            else{
+                voice_desc = d.object_description +" . 색깔은 "+ d.object_color +"이며, 그림의  "+ d.object_position +"에 위치해 있습니다.";
+            }
+            return voice_desc;
+        }
+            });
 }
 
 function change_voice_option(voice_flag){
@@ -335,22 +368,26 @@ var objects =  svg2.append("text")
    .text(objects_list.join(", "))
    .on("click", function(){responsiveVoice.cancel(); responsiveVoice.speak(String(objects_list), language, {rate: 0.8});});
 
-var data = [{label: "Voice", x: 30, y: 60 },
-            {label: "Segmentation Mode", x: 130, y: 60 }];
+var data = [{label: "상세설명모드", x: parseInt(img_file.width)+70, y: 30 },
+            {label: "물체구분모드", x: parseInt(img_file.width)+70, y: 70 }];
             //{label: "Reset", x: 230, y: 60  }];
-/*
+
 var button = d3.button()
     .on('press', function(d, i) {
         if(d.label == "Voice"){
             voice_flag = voice(voice_flag);
         }
-        else if(d.label == "Segmentation Mode"){
+        else if(d.label == "물체구분모드"){
             seg_mode = change_seg_mode(seg_mode);
             draw_polygon(seg_mode);
         }
         else if(d.label == "Reset"){
             reset();
             this.release();
+        }
+        else if(d.label == "상세설명모드"){
+            desc_mode = change_desc_mode();
+            draw_polygon();
         }
     })
     .on('release', function(d, i) {
@@ -363,13 +400,13 @@ var button = d3.button()
         }
     });
 
-var buttons = svg2.selectAll('.button')
+var buttons = svg.selectAll('.button')
     .data(data)
   .enter()
     .append('g')
     .attr('class', 'button')
     .call(button);
-*/
+
 function reset() {
     var t = d3.zoomIdentity.translate(0, 0).scale(1)
     svg.call(zoomListener.transform, t)
