@@ -183,10 +183,7 @@ function draw_polygon(seg_mode){
     .on("click", function(d) {
             if(voice_flag == "on"){
 
-                var synth = window.speechSynthesis;
-
-                if(synth.speaking)
-                    synth.cancel();
+                responsiveVoice.cancel();
                 /*
                 if(d.object_position.includes("side")){
                     voice_desc = "this is "+d.object_description +", color is "+ d.object_color +", and this is located on  the  "+ d.object_position +" of the picture";
@@ -207,6 +204,16 @@ function draw_polygon(seg_mode){
              })
     .append("svg:title")
     .text(function(d) {
+
+        if(d.category == "배경")
+            return d.category + ".." + "그림의 배경입니다";
+        else{
+            if(d.duplicates_num != 1)
+                return d.category + String(d.duplicates_num) + ".." + d.object_description +" . 색깔은 "+ d.object_color +"이며, 그림의  "+ d.object_position +"에 위치해 있습니다.";
+            else
+                return d.category + ".." + d.object_description +" . 색깔은 "+ d.object_color +"이며, 그림의  "+ d.object_position +"에 위치해 있습니다.";
+            }
+        /*
         if(desc_mode == 0){
             if(d.category == "배경")
             return d.category;
@@ -226,6 +233,7 @@ function draw_polygon(seg_mode){
             }
             return voice_desc;
         }
+        */
             });
 }
 
@@ -256,7 +264,7 @@ var voice_flag = "on";
 
 var margin = {top: 0, right: 20, bottom: 0, left: 50},
     width = 800,
-    height = 600;
+    height = 900;
 
 var svg2 = d3.select(".image").append("svg")
   .attr("width", 800)
@@ -368,16 +376,16 @@ var objects =  svg2.append("text")
    .text(objects_list.join(", "))
    .on("click", function(){responsiveVoice.cancel(); responsiveVoice.speak(String(objects_list), language, {rate: 0.8});});
 
-var data = [{label: "상세설명모드", x: parseInt(img_file.width)+70, y: 30 },
-            {label: "물체구분모드", x: parseInt(img_file.width)+70, y: 70 }];
+var data = //[{label: "상세설명모드", x: parseInt(img_file.width)+70, y: 30 },
+            [{label: "Segmentation Mode", x: 70, y:  parseInt(img_file.height)+70}];
             //{label: "Reset", x: 230, y: 60  }];
-
+/*
 var button = d3.button()
     .on('press', function(d, i) {
         if(d.label == "Voice"){
             voice_flag = voice(voice_flag);
         }
-        else if(d.label == "물체구분모드"){
+        else if(d.label == "Segmentation Mode"){
             seg_mode = change_seg_mode(seg_mode);
             draw_polygon(seg_mode);
         }
@@ -386,6 +394,9 @@ var button = d3.button()
             this.release();
         }
         else if(d.label == "상세설명모드"){
+
+            svg.selectAll("svg:title").remove();
+
             desc_mode = change_desc_mode();
             draw_polygon();
         }
@@ -398,6 +409,12 @@ var button = d3.button()
             seg_mode = change_seg_mode(seg_mode);
             draw_polygon(seg_mode);
         }
+        else if(d.label == "상세설명모드"){
+
+            desc_mode = change_desc_mode();
+            draw_polygon();
+
+        }
     });
 
 var buttons = svg.selectAll('.button')
@@ -406,7 +423,8 @@ var buttons = svg.selectAll('.button')
     .append('g')
     .attr('class', 'button')
     .call(button);
-
+    */
+/*
 function reset() {
     var t = d3.zoomIdentity.translate(0, 0).scale(1)
     svg.call(zoomListener.transform, t)
@@ -444,3 +462,11 @@ function doc_keyUp(e) {
 }
 // register the handler
 document.addEventListener('keyup', doc_keyUp, false);
+*/
+
+function seg_mode_button(seg_mode){
+     seg_mode = change_seg_mode(seg_mode);
+     draw_polygon(seg_mode);
+
+     return seg_mode;
+}

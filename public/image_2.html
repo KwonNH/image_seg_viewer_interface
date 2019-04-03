@@ -35,7 +35,7 @@
       padding-left: 5%;
       width:20%;
       float:left;
-      height:150px;
+      height:5%;
       overflow: scroll
     }
   </style>
@@ -49,18 +49,21 @@
     <script>
       var img_id = 2;
   </script>
-    <center>
-</center>
+
 <div id="metadata">
 <script src="js/image_data_kor.js" ></script>
 <script src="js/load_metadata.js" ></script>
 </div>
+  <div class="buttons">
+    <button onclick="seg_mode = seg_mode_button(seg_mode);">Segmentation Mode</button>
+  </div>
 
 <center>
 <div class="image">
   <script src="js/polygon.js"></script>
 </div>
 </center>
+
 </div>
 
 
